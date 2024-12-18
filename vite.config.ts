@@ -1,10 +1,12 @@
-import { vitePlugin as remix } from '@remix-run/dev';
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import loadVersion from 'vite-plugin-package-version';
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  optimizeDeps: {
-    exclude: ['utah-design-system'],
+  plugins: [react(), loadVersion()],
+  resolve: {
+    // this is only applicable when pnpm-linking the utah-design-package
+    dedupe: ['firebase', '@arcgis/core'],
   },
-  plugins: [remix(), tsconfigPaths()],
 });

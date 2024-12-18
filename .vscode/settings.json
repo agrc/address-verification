@@ -1,10 +1,22 @@
 {
   "cSpell.words": [
     "addressverification",
+    "Geospatial",
     "isbot",
     "packagejson",
+    "startcase",
     "tailwindcss",
+    "tsconfigs",
     "typecheck",
-    "utds"
-  ]
+    "uidotdev",
+    "usehooks",
+    "utds",
+    "veri",
+    "VITE"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
 }
