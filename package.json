@@ -30,7 +30,7 @@
   "dependencies": {
     "@arcgis/core": "^4.31.6",
     "@tanstack/react-query": "^5.62.8",
-    "@ugrc/utah-design-system": "^1.18.1",
+    "@ugrc/utah-design-system": "^1.18.2",
     "@uidotdev/usehooks": "^2.4.1",
     "firebase": "^11.1.0",
     "ky": "^1.7.4",

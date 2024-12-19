@@ -3,20 +3,12 @@ import { Footer, Header, TextField, UgrcLogo, useFirebaseAnalytics, useFirebaseA
 import { useDebounce } from '@uidotdev/usehooks';
 import ky from 'ky';
 import { useEffect, useState } from 'react';
-import Candidate, { type CandidateProps } from './components/Candidate';
+import { type CandidateProps } from './components/Candidate';
+import Results from './components/Results';
 import config from './config';
 
 // const apiKey = import.meta.env.VITE_WEB_API;
 const version = import.meta.env.PACKAGE_VERSION;
-
-const ErrorFallback = ({ error }: { error: Error }) => {
-  return (
-    <div role="alert">
-      <p>Something went wrong:</p>
-      <pre style={{ color: 'red' }}>{error.message}</pre>
-    </div>
-  );
-};
 
 // esriConfig.assetsPath = './assets';
 const links = [
@@ -133,21 +125,24 @@ export default function App() {
         </div>
       </Header>
       <main>
-        <div className="m-20">
-          <span>
+        <div className="flex w-full flex-col items-center gap-2 p-10">
+          <p className="max-w-md text-center">
             Enter a street address and a city or zip code. E.g. "123 South Main Street, 84115" or "123 S Main St, Salt
             Lake City"
-          </span>
+          </p>
           <TextField
             aria-label="enter street address"
             inputMode="search"
+            className="w-full"
             type="search"
             value={searchValue}
             onChange={setSearchValue}
+            inputProps={{
+              spellCheck: false,
+              className: 'text-2xl',
+            }}
           />
-          {isLoading && <div>Loading...</div>}
-          {error && <ErrorFallback error={error} />}
-          {candidates && candidates.length > 0 && candidates.map((props, i) => <Candidate key={i} {...props} />)}
+          {debouncedSearchValue && <Results candidates={candidates} error={error} isLoading={isLoading} />}
         </div>
       </main>
       <Footer />
