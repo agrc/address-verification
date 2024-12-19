@@ -16,10 +16,11 @@ export default function Candidate(props: CandidateProps) {
     <>
       <div className="mb-4 w-full rounded-md border border-slate-300 bg-slate-50 p-4">
         <div className="flex items-center justify-between">
-          <h4>Match Address</h4>
+          <span className="text-xl font-bold">
+            <CopyToClipboard text={props.matchAddress} />
+          </span>
           <span>score: {props.score}</span>
         </div>
-        <CopyToClipboard text={props.matchAddress} />
         <div>
           <h6>Locator</h6>
           <CopyToClipboard text={props.locator} />
