@@ -1,16 +1,14 @@
+import type { Location } from '../shared.types';
+import CopyToClipboard from './CopyToClipboard';
+import SearchApiQuery from './SearchApiQuery';
+
 export type CandidateProps = {
   addressGrid: string;
   locator: string;
   matchAddress: string;
   score: number;
   standardizedAddress: string;
-  location: {
-    x: number;
-    y: number;
-    spatialReference: {
-      wkid: number;
-    };
-  };
+  location: Location;
 };
 
 export default function Candidate(props: CandidateProps) {
@@ -21,21 +19,27 @@ export default function Candidate(props: CandidateProps) {
           <h4>Match Address</h4>
           <span>score: {props.score}</span>
         </div>
-        <p>{props.matchAddress}</p>
+        <CopyToClipboard text={props.matchAddress} />
         <div>
           <h6>Locator</h6>
-          <span>{props.locator}</span>
+          <CopyToClipboard text={props.locator} />
         </div>
         <div>
           <h6>Coordinates ({props.location.spatialReference.wkid})</h6>
-          <span>
-            ({props.location.x}, {props.location.y})
-          </span>
+          <CopyToClipboard text={`${props.location.x}, ${props.location.y}`} />
         </div>
         <div>
           <h6>Address Grid</h6>
-          <span>{props.addressGrid}</span>
+          <CopyToClipboard text={props.addressGrid} />
         </div>
+        <SearchApiQuery label="Zip Code" location={props.location} table="boundaries.zip_code_areas" field="zip5" />
+        <SearchApiQuery
+          label="Municipality"
+          location={props.location}
+          table="boundaries.municipal_boundaries"
+          field="name"
+        />
+        <SearchApiQuery label="County" location={props.location} table="boundaries.county_boundaries" field="name" />
       </div>
     </>
   );
